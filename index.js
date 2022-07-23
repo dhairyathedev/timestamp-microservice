@@ -26,24 +26,24 @@ app.get("/api/:date", function (req, res) {
     return res.send({error: "Invalid Date"});
   }
 
-
-  if(!(/[-]/.test(req.params.date)) && Number(req.params.date))
+  else if(!(/[-]/.test(req.params.date)) && Number(req.params.date))
   {
+    let date = new Date(Number(req.params.date));
 
     return res.send({
-      unix: new Date(req.params.date).getTime(),
-      utc: new Date(req.params.date).toUTCString()
+      unix: date.getTime(),
+      utc: date.toUTCString()
     });
   } 
-
-
+  let date = new Date(req.params.date);
 
   let result = {
-    unix: new Date(req.params.date).getTime(),
-    utc: new Date(req.params.date).toUTCString()
+    unix: date.getTime(),
+    utc: date.toUTCString()
   }
 
   res.status(200).send(result);
+
 });
 
 
